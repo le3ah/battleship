@@ -1,0 +1,69 @@
+player
+  attributes
+    turn
+    ships
+    ship layout grid
+    damage tracking grid
+
+  methods
+    computer?
+    guess
+
+damage tracking grid
+  attributes
+    guess
+    coordinates
+    grid
+
+  methods
+    hit?
+
+main menu
+   attributes
+
+   methods
+    output main menu
+    start game
+    output instructions
+    input from player
+    validate input
+    quit game
+
+ship
+   attributes
+     coordinates
+
+   methods
+    record hit
+    sunk?
+
+ship layout gird
+  attributes
+    length
+    height
+
+  method
+    validate ship placement
+    record ship placement
+
+game play
+  attributes
+    start game time
+    end game time
+    number of shots
+    player1
+    player2
+    current player(turn)
+
+  methods
+    input for play
+    validate coordinates
+    output game
+    input ship placement
+    output endgame (total time and shots, who won, goodbye message)
+    change player
+    output damage
+
+guess
+   attributes
+    coordinates

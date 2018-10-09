@@ -1,0 +1,27 @@
+
+input main menu *
+output main menu *
+
+computer player *
+non computer player*
+ships *
+positioning of ship*
+
+input playing the game *
+validate the coordinate choice *
+output playing the game*
+
+input ship coordinates *
+validation of coordinates *
+output ship coordinates *
+
+tracking turns *
+grid *
+record damage *
+track damage coordinates *
+represent damage on the board
+
+board for player  *
+board for computer *
+track game time *
+track how many shots the player took*

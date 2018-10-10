@@ -12,11 +12,26 @@ end
 def test_random_sort_picks_ship_1
   computer = Computer.new
   assert_equal String, computer.random_sort_ship_1.class
+end
 
-end
-def test_ship_1_coordinate_1_does_not_equal_ship_1_coordinate_2
+def test_create_new_grid_works
   computer = Computer.new
-  # require 'pry'; binding.pry 
-  assert @computer_ship_coordinate_1 != @comptuer_ship_coordinate_2
+  computer.random_sort_ship_1
+  assert_equal Array, computer.create_new_grid.class
 end
+
+def test_random_sort_picks_ship_2
+  computer = Computer.new
+  computer.random_sort_ship_1
+  computer.create_new_grid 
+  assert_equal String, computer.random_sort_ship_2.class
+end
+
+# def test_ship_1_coordinate_1_does_not_equal_ship_1_coordinate_2
+#   computer = Computer.new
+#   computer.random_sort_ship_1
+#   computer.random_sort_ship_2
+#   # require 'pry'; binding.pry
+#   assert_equal @computer_ship_coordinate_1 != @comptuer_ship_coordinate_2
+# end
 end

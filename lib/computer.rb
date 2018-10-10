@@ -6,7 +6,9 @@ attr_reader :random_sort_ship_1, :random_sort_ship_2
                   "B1", "B2", "B3", "B4",
                   "C1", "C2", "C3", "C4",
                   "D1", "D2", "D3", "D4"]
+  @computer_ship_1 = [@computer_ship_coordinate_1, @computer_ship_coordinate_2]
   end
+
   def random_sort_ship_1
     @computer_ship_coordinate_1 = @computer_grid.shuffle.pop
   end
@@ -50,5 +52,8 @@ attr_reader :random_sort_ship_1, :random_sort_ship_2
   def random_sort_ship_2
     @computer_ship_coordinate_2 = @new_grid.shuffle.pop
   end
-
+  def second_ship_grid
+    @new_grid.delete(@computer_ship_coordinate_1)
+    @new_grid.delete(@computer_ship_coordinate_2)
+  end
 end

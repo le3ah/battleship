@@ -23,15 +23,24 @@ end
 def test_random_sort_picks_ship_2
   computer = Computer.new
   computer.random_sort_ship_1
-  computer.create_new_grid 
+  computer.create_new_grid
   assert_equal String, computer.random_sort_ship_2.class
 end
 
-# def test_ship_1_coordinate_1_does_not_equal_ship_1_coordinate_2
+def test_ship_1_coordinate_1_does_not_equal_ship_1_coordinate_2
+  computer = Computer.new
+  computer.random_sort_ship_1
+  computer.create_new_grid
+  computer.random_sort_ship_2
+  assert computer.random_sort_ship_1 != computer.random_sort_ship_2
+#  assert @computer_ship_coordinate_1 != @comptuer_ship_coordinate_2
+end
+
+# def test_second_ship_grid_does_not_include_ship_1
 #   computer = Computer.new
 #   computer.random_sort_ship_1
+#   computer.create_new_grid
 #   computer.random_sort_ship_2
-#   # require 'pry'; binding.pry
-#   assert_equal @computer_ship_coordinate_1 != @comptuer_ship_coordinate_2
+#   assert
 # end
 end

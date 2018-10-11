@@ -38,11 +38,12 @@ rows = { "row_2" => {
 }
 }
 
-grid = rows.keys.each do |key|
+empty_grid = rows.keys.each do |key|
 puts rows[key].values.join
 end
 
-puts "============"
+puts "============
+"
 
 end
 end

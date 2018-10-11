@@ -1,4 +1,7 @@
+require "./lib/grid.rb"
+
 class Game
+attr_reader :human_coordinates_ship_1
 
 def initialize
   @answer
@@ -24,9 +27,26 @@ def play_game
   end
 end
 
+def player_human_place_ships
+  puts  "I have laid out my ships on the grid.
+    You now need to layout your two ships.
+    The first is two units long and the
+    second is three units long.
+    The grid has A1 at the top left and D4 at the bottom right and looks like this:
+    "
 
+  human_grid = Grid.new
+  puts human_grid.board
+
+  puts  "Enter the squares for the two-unit ship:"
+  puts ">"
+  @human_coordinates_ship_1 = gets.chomp.upcase
+  puts "Valid coordinates, now place your three-unit ship:"
+  @human_coordinates_ship_2 = gets.chomp.upcase
+end
 end
 
 
 game_1 = Game.new
 game_1.play_game
+game_1.player_human_place_ships

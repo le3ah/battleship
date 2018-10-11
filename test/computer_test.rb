@@ -36,11 +36,13 @@ def test_ship_1_coordinate_1_does_not_equal_ship_1_coordinate_2
 #  assert @computer_ship_coordinate_1 != @comptuer_ship_coordinate_2
 end
 
-# def test_second_ship_grid_does_not_include_ship_1
-#   computer = Computer.new
-#   computer.random_sort_ship_1
-#   computer.create_new_grid
-#   computer.random_sort_ship_2
-#   assert
-# end
+def test_ship_2_coordinate_1_does_not_equal_ship_1_coordinate_1_or_2
+  computer = Computer.new
+  computer.random_sort_ship_1
+  computer.create_new_grid
+  computer.random_sort_ship_2
+  assert computer.second_ship_coordinate_1 != computer.random_sort_ship_1
+  assert computer.second_ship_coordinate_1 != computer.random_sort_ship_2
+end
+
 end

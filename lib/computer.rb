@@ -52,8 +52,15 @@ attr_reader :random_sort_ship_1, :random_sort_ship_2
   def random_sort_ship_2
     @computer_ship_coordinate_2 = @new_grid.shuffle.pop
   end
-  def second_ship_grid
-    @new_grid.delete(@computer_ship_coordinate_1)
-    @new_grid.delete(@computer_ship_coordinate_2)
+  def second_ship_coordinate_1
+    loop do
+      ship_2_coordinate_1 = @computer_grid.shuffle.pop
+      if ship_2_coordinate_1 != @computer_ship_coordinate_1 && ship_2_coordinate_1 != @computer_ship_coordinate_2
+          break
+      end
+    end
   end
+  # select second ship coordinate 1 that does not equal ship 1 coordinates
+  # run selection back through create_new_grid method
+  # map through index position of grid 1 & 2
 end

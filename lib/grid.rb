@@ -1,10 +1,14 @@
 class Grid
+ attr_reader :rows
+#determine how you are going to store the shot information on the board
+#and how the board is printed with the shot information
+#consider making the board structure an instance variable to hold the data for shots
 
 def board
   puts "============"
 puts ". 1 2 3 4"
 
-rows = { "row_2" => {
+@rows = { "row_2" => {
  "A" => "A",
  "A1" => " ",
  "A2" => " ",
@@ -47,6 +51,3 @@ puts "============
 
 end
 end
-
-computer_grid = Grid.new
-computer_grid.board

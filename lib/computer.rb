@@ -54,9 +54,55 @@ attr_reader :random_sort_ship_1, :random_sort_ship_2
   end
   def second_ship_coordinate_1
     loop do
-      ship_2_coordinate_1 = @computer_grid.shuffle.pop
-      if ship_2_coordinate_1 != @computer_ship_coordinate_1 && ship_2_coordinate_1 != @computer_ship_coordinate_2
+      @computer_ship_2_coordinate_1 = @computer_grid.shuffle.pop
+      if @computer_ship_2_coordinate_1 != @computer_ship_coordinate_1 && @computer_ship_2_coordinate_1 != @computer_ship_coordinate_2
           break
+      end
+    end
+    @computer_ship_2_coordinate_1
+  end
+
+  def create_second_ship_grid
+    if @computer_ship_2_coordinate_1 == "A1"
+      @second_ship_grid =["A2","B2"]
+    elsif @computer_ship_2_coordinate_1 == "A2"
+      @second_ship_grid = ["A1", "B2", "A3"]
+    elsif @computer_ship_2_coordinate_1 == "A3"
+      @second_ship_grid = ["A2", "B3", "A4"]
+    elsif @computer_ship_2_coordinate_1 == "A4"
+      @second_ship_grid = ["A3", "B4"]
+    elsif @computer_ship_2_coordinate_1 == "B1"
+      @second_ship_grid = ["A1", "B2", "C1"]
+    elsif @computer_ship_2_coordinate_1 == "B2"
+      @second_ship_grid = ["A2", "B1", "B3", "C2"]
+    elsif @computer_ship_2_coordinate_1 == "B3"
+      @second_ship_grid = ["A3", "B2", "B4", "C3"]
+    elsif @computer_ship_2_coordinate_1 == "B4"
+      @second_ship_grid = ["A4", "B3", "C4"]
+    elsif @computer_ship_2_coordinate_1 == "C1"
+      @second_ship_grid = ["B1", "C2", "D1"]
+    elsif @computer_ship_2_coordinate_1 == "C2"
+      @second_ship_grid = ["B2", "C1", "C3", "D2"]
+    elsif @computer_ship_2_coordinate_1 == "C3"
+      @second_ship_grid = ["B3", "C2", "C4", "D3"]
+    elsif @computer_ship_2_coordinate_1 == "C4"
+      @second_ship_grid = ["B4", "C3", "D4"]
+    elsif @computer_ship_2_coordinate_1 == "D1"
+      @second_ship_grid = ["C1", "D2"]
+    elsif @computer_ship_2_coordinate_1 == "D2"
+      @second_ship_grid = ["C2", "D1", "D3"]
+    elsif @computer_ship_2_coordinate_1 == "D3"
+      @second_ship_grid = ["C3", "D2", "D4"]
+    elsif @computer_ship_2_coordinate_1 == "D4"
+      @second_ship_grid = ["C4", "D3"]
+    end
+    @second_ship_grid
+  end
+  def random_sort_ship_2_coordinate_2
+    loop do
+      @computer_ship_2_coordinate_2 = @second_ship_grid.shuffle.pop
+      if @computer_ship_2_coordinate_2 != @computer_ship_coordinate_1 && @computer_ship_2_coordinate_2 != @computer_ship_coordinate_2 && @computer_ship_2_coordinate_2 != @computer_ship_2_coordinate_1
+        break
       end
     end
   end

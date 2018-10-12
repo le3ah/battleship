@@ -24,5 +24,10 @@ def test_coordinate_2_returns_array
   computer.pick_change_coordinate
   assert_equal Array, computer.pick_coordinate_2_ship_1.class
 end
-
+def test_coordinate_2_returns_array
+  computer = Computer.new
+  computer.pick_change_coordinate
+  computer.pick_coordinate_2_ship_1
+  assert_equal Array, computer.ship_2_coordinate_1.class
+end
 end

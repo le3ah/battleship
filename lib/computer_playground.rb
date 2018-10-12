@@ -2,8 +2,8 @@ class Computer
 
   def initialize
     @max_size = 4
-    @index_x = {0 => "A", 1 => "B", 2 => "C", 3 => "D"}
-    @index_y = {0 => 1, 1 => 2, 2 =>3, 3 => 4}
+    @index_x = ["A","B","C","D"]
+    @index_y = [1, 2, 3, 4]
   end
 
   def computer_ship_1_coordinate_1
@@ -40,6 +40,19 @@ class Computer
     end
     @computer_ship_1_coordinate_2 = [@index_x_2, @index_y_2]
   end
+
+  def ship_2_coordinate_1
+    loop do
+      @index_x_3 = @index_x.shuffle.pop
+      @index_y_3 = @index_y.shuffle.pop
+      @computer_ship_2_coordinate_1 = [@index_x_3, @index_y_3]
+      if @computer_ship_2_coordinate_1 != @computer_ship_1_coordinate_1 && @computer_ship_2_coordinate_1 != @computer_ship_1_coordinate_2
+        break
+      end
+    end
+    @computer_ship_2_coordinate_1
+  end
+
 
 
 #   def computer_ship_1_coordinate_2

@@ -7,10 +7,9 @@ class Computer
   end
 
   def computer_ship_1_coordinate_1
-    index_x_1 = Random.rand(@max_size)
-    index_y_1 = Random.rand(@max_size)
-    @computer_ship_1_coordinate_1 = [index_x_1, index_y_1]
-    require 'pry'; binding.pry
+    @index_x_1 = Random.rand(@max_size)
+    @index_y_1 = Random.rand(@max_size)
+    @computer_ship_1_coordinate_1 = [@index_x_1, @index_y_1]
   end
 
   def pick_change_coordinate
@@ -18,9 +17,28 @@ class Computer
   end
 
   def move_coordinates
-    if @movement = "change_x"
-      if index_x_1 = 0
-        
+    if @movement == "change_x"
+      @index_y_2 = @index_y_1
+      if @index_x_1 == 0
+        @index_x_2 = 1
+      elsif @index_x_1 == 3
+        @index_x_2 = 2
+      elsif @index_x_1 == 1 && @index_x_1 == 2
+        change_x = [-1,1].shuffle.pop
+        @index_x_2 = change_x + @index_x_1
+      end
+    else # @movement == "change_y"
+      @index_x_2 = @index_x_1
+      if @index_y_1 == 0
+        @index_y_2 = 1
+      elsif @index_y_1 == 3
+        @index_y_2 = 2
+      elsif @index_y_1 == 1 && @index_y_1 == 2
+        change_y = [-1,1].shuffle.pop
+        @index_y_2 = change_y + @index_y_1
+      end
+    end
+    @computer_ship_1_coordinate_2 = [@index_x_2, @index_y_2]
   end
 
 

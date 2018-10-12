@@ -15,7 +15,7 @@ attr_reader :random_sort_ship_1, :random_sort_ship_2
 
   def create_new_grid
     if @computer_ship_coordinate_1 == "A1"
-      @new_grid =["A2","B2"]
+      @new_grid =["A2","B1"]
     elsif @computer_ship_coordinate_1 == "A2"
       @new_grid = ["A1", "B2", "A3"]
     elsif @computer_ship_coordinate_1 == "A3"
@@ -49,9 +49,11 @@ attr_reader :random_sort_ship_1, :random_sort_ship_2
     end
     @new_grid
   end
+
   def random_sort_ship_2
     @computer_ship_coordinate_2 = @new_grid.shuffle.pop
   end
+
   def second_ship_coordinate_1
     loop do
       @computer_ship_2_coordinate_1 = @computer_grid.shuffle.pop
@@ -98,6 +100,7 @@ attr_reader :random_sort_ship_1, :random_sort_ship_2
     end
     @second_ship_grid
   end
+
   def random_sort_ship_2_coordinate_2
     loop do
       @computer_ship_2_coordinate_2 = @second_ship_grid.shuffle.pop
@@ -106,61 +109,11 @@ attr_reader :random_sort_ship_1, :random_sort_ship_2
       end
     end
   end
-
-  def generate_ship_2_coordinate_3
-    index_1 = @computer_grid.index(@computer_ship_2_coordinate_1)
-    index_2 = @computer_grid.index(@computer_ship_2_coordinate_2)
-    difference = index_1 - index_2
-    # if difference = -4
-    #   if index_2 < 12
-    #     index_3 = index_2 + 4
-    #   else
-    #     index_3 = index_1 - 4
-    #   end
-    # elsif difference = 4
-    #   if index_2 > 3
-    #     index_3 = index_2 - 4
-    #   else
-    #     index_3 = index_1 + 4
-    #   end
-    # elsif difference = -1
-    #   if index_1 = 14
-    #     index_3 = 13
-    #   elsif index_1 = 12
-    #     index_3 = 14
-    #   elsif index_1 = 10
-    #     index_3 = 9
-    #   elsif index_1 = 8
-    #     index_3 = 10
-    #   elsif index_1 = 6
-    #     index_3 = 5
-    #   elsif index_1 = 4
-    #     index_3 =6
-    #   elsif index_1 =2
-    #     index_3 = 1
-    #   else index_1 = 0
-    #     index_3 = 2
-    #   end
-    # else difference = 1
-    #   if index_2 = 15
-    #     index_3 = 13
-    #   elsif index_2 = 13
-    #     index_3 = 14
-    #   elsif index_2 = 11
-    #     index_3 = 9
-    #   elsif index_2 = 9
-    #     index_3 = 10
-    #   elsif index_2 = 7
-    #     index_3 = 5
-    #   elsif index_2 = 5
-    #     index_3 = 6
-    #   elsif index_2 = 3
-    #     index_3 = 1
-    #   else index_2 = 1
-    #     index_3 = 2
-    #   end
-    # end
-
-  end
+def move_vertically
+  index_1 = @computer_grid.index(@computer_ship_2_coordinate_1)
+  index_2 = @computer_grid.index(@computer_ship_2_coordinate_2)
+end
+def random_sort_ship_2_coodrinate_3
+end
   # map through index position of grid 1 & 2
 end

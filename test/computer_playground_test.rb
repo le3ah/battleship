@@ -19,4 +19,10 @@ def test_pick_change_coordinates_is_string
   assert_equal String, computer.pick_change_coordinate.class
 end
 
+def test_coordinate_2_returns_array
+  computer = Computer.new
+  computer.pick_change_coordinate
+  assert_equal Array, computer.pick_coordinate_2_ship_1.class
+end
+
 end

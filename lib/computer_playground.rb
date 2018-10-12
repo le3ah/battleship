@@ -16,7 +16,7 @@ class Computer
     @movement = ["change_x", "change_y"].shuffle.pop
   end
 
-  def move_coordinates
+  def pick_coordinate_2_ship_1
     if @movement == "change_x"
       @index_y_2 = @index_y_1
       if @index_x_1 == 0

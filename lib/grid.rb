@@ -1,5 +1,5 @@
 class Grid
- attr_reader :rows
+ attr_accessor :rows
 #determine how you are going to store the shot information on the board
 #and how the board is printed with the shot information
 #consider making the board structure an instance variable to hold the data for shots

@@ -1,9 +1,11 @@
 class Computer
 
+attr_reader :map_ship_1, :map_ship_2
   def initialize
     @max_size = 4
     @index_x = ["A","B","C","D"]
-    @index_y = [1, 2, 3, 4]
+    @index_y = ["1", "2", "3", "4"]
+
   end
 
   def computer_ship_1_coordinate_1
@@ -52,7 +54,7 @@ class Computer
   end
 
   def ship_2_coordinate_2
-    loop do
+    # loop do
       if @movement == "change_x"
         @index_y_4 = @index_y_3
         @index_x_4 = second_coordinate(@index_x_3)
@@ -60,50 +62,41 @@ class Computer
         @index_x_4 = @index_x_3
         @index_y_4 = second_coordinate(@index_y_3)
       end
-      @computer_ship_2_coordinate_2 = [@index_x_4, @index_y_4]
-      if @computer_ship_2_coordinate_2 != @computer_ship_1_coordinate_1 &&
-        @computer_ship_2_coordinate_2 != @computer_ship_1_coordinate_2 &&
-        @computer_ship_2_coordinate_2 != @computer_ship_2_coordinate_1
-        break
-      end
-    end
-    @computer_ship_2_coordinate_2
+        @computer_ship_2_coordinate_2 = [@index_x_4, @index_y_4]
+      # if @computer_ship_2_coordinate_2 != @computer_ship_1_coordinate_1 &&
+      #   @computer_ship_2_coordinate_2 != @computer_ship_1_coordinate_2 &&
+      #   @computer_ship_2_coordinate_2 != @computer_ship_2_coordinate_1
+      #   break
+      # end
+    # end
+    @computer_ship_2_coordinate_2 #= [@index_x_4, @index_y_4]
   end
 
-#   def computer_ship_1_coordinate_2
-#     if index_x_1 == 0 && index_y_1 == 0
-#       x_movement = [0, 1].shuffle.pop
-#       if x_movement == 0
-#         y_movement = 1
-#       else y_movement = 0
-#       end
-#     elsif index_x_1 == 3 && index_y_1 == 3
-#       x_movement = [-1,0].shuffle.pop
-#       if x_movement == 0
-#         y_movement = -1
-#       else y_movement = 0
-#       end
-#     end
-#
-#     if index_x_1 == 0
-#         x_movement = [0, 1].shuffle.pop
-#     elsif index_x_1 == 3
-#         x_movement = [-1, 0].shuffle.pop
-#     else x_movement = Random.rand(-1..1)
-#     end
-#
-#     if x_movement == 0
-#       y_movement == [-1, 1].shuffle.pop
-#     else y_movement == 0
-#     end
-#     index_x_2 = index_x_1 + x_movement
-#     index_y_2 = index_y_1 + y_movement
-#     @computer_ship_1_coordinate_2 = [index_x_2, index_y_2]
-#
-#   end
-#   # figure out where index_x_2 needs to be
-#   # figure out where index_y_2 needs to be
-#   # map coordinates to hash of letters & numbers
-# # x = {mapping of numbers to letters}
-# # y = (mapping of numbers)
+  def pick_coordinate_3(third, fourth)
+
+    if fourth == 3 || third == 3
+      fifth = 1
+    elsif fourth == 0 || third == 0
+      fifth = 2
+    else fifth = [0, 3].sample
+    end
+  end
+
+  def ship_2_coordinate_3
+      if @index_x_3 == @index_x_4
+        @index_x_5 = @index_x_3
+        @index_y_5 = pick_coordinate_3(@index_y_3, @index_y_4)
+      else @index_y_5 = @index_y_3
+        @index_x_5 = pick_coordinate_3(@index_x_3, @index_x_4)
+      end
+     @computer_ship_2_coordinate_3 = [@index_x_5, @index_y_5]
+  end
+
+  def map_ship_1
+    @computer_ship_1 = [[@index_x[@index_x_1], @index_y[@index_y_1]], [@index_x[@index_x_2], @index_y[@index_y_2]]]
+  end
+
+  def map_ship_2
+    @computer_ship_2 = [[@index_x[@index_x_3], @index_y[@index_y_3]],[@index_x[@index_x_4], @index_y[@index_y_4]], [@index_x[@index_x_5], @index_y[@index_y_5]]]
+  end
 end

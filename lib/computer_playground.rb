@@ -13,47 +13,62 @@ class Computer
   end
 
   def pick_change_coordinate
-    @movement = ["change_x", "change_y"].shuffle.pop
+    @movement = ["change_x", "change_y"].sample
   end
 
-  def pick_coordinate_2_ship_1
+  def second_coordinate(first)
+    if first == 0
+      second = 1
+    elsif first == 3
+      second = 2
+    else # first == 1 || first == 2
+      change_x = [-1,1].sample
+      second = change_x + first
+    end
+  end
+
+  def pick_coordinate_2
     if @movement == "change_x"
       @index_y_2 = @index_y_1
-      if @index_x_1 == 0
-        @index_x_2 = 1
-      elsif @index_x_1 == 3
-        @index_x_2 = 2
-      elsif @index_x_1 == 1 && @index_x_1 == 2
-        change_x = [-1,1].shuffle.pop
-        @index_x_2 = change_x + @index_x_1
-      end
+      @index_x_2 = second_coordinate(@index_x_1)
     else # @movement == "change_y"
       @index_x_2 = @index_x_1
-      if @index_y_1 == 0
-        @index_y_2 = 1
-      elsif @index_y_1 == 3
-        @index_y_2 = 2
-      elsif @index_y_1 == 1 && @index_y_1 == 2
-        change_y = [-1,1].shuffle.pop
-        @index_y_2 = change_y + @index_y_1
-      end
+      @index_y_2 = second_coordinate(@index_y_1)
     end
     @computer_ship_1_coordinate_2 = [@index_x_2, @index_y_2]
   end
 
   def ship_2_coordinate_1
     loop do
-      @index_x_3 = @index_x.shuffle.pop
-      @index_y_3 = @index_y.shuffle.pop
+      @index_x_3 = @index_x.index(@index_x.sample)
+      @index_y_3 = @index_y.index(@index_y.sample)
       @computer_ship_2_coordinate_1 = [@index_x_3, @index_y_3]
-      if @computer_ship_2_coordinate_1 != @computer_ship_1_coordinate_1 && @computer_ship_2_coordinate_1 != @computer_ship_1_coordinate_2
+      if @computer_ship_2_coordinate_1 != @computer_ship_1_coordinate_1 &&
+        @computer_ship_2_coordinate_1 != @computer_ship_1_coordinate_2
         break
       end
     end
     @computer_ship_2_coordinate_1
   end
 
-
+  def ship_2_coordinate_2
+    loop do
+      if @movement == "change_x"
+        @index_y_4 = @index_y_3
+        @index_x_4 = second_coordinate(@index_x_3)
+      else
+        @index_x_4 = @index_x_3
+        @index_y_4 = second_coordinate(@index_y_3)
+      end
+      @computer_ship_2_coordinate_2 = [@index_x_4, @index_y_4]
+      if @computer_ship_2_coordinate_2 != @computer_ship_1_coordinate_1 &&
+        @computer_ship_2_coordinate_2 != @computer_ship_1_coordinate_2 &&
+        @computer_ship_2_coordinate_2 != @computer_ship_2_coordinate_1
+        break
+      end
+    end
+    @computer_ship_2_coordinate_2
+  end
 
 #   def computer_ship_1_coordinate_2
 #     if index_x_1 == 0 && index_y_1 == 0

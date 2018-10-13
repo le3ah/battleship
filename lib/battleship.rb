@@ -7,9 +7,6 @@ attr_reader :human_coordinates_ship_1
 
   def initialize
     @answer
-    ship1 = Ship.new(2, ["A1", "B1"])
-    ship2 = Ship.new(2, ["D2", "D3"])
-    @computer_ships = [ ship1, ship2]
   end
 
   def welcome
@@ -56,16 +53,18 @@ attr_reader :human_coordinates_ship_1
       second is three units long.
       The grid has A1 at the top left and D4 at the bottom right and looks like this:
       "
-
-      @human_grid = Grid.new
-      puts @human_grid.board
-
+    create_human_grid
+    puts @human_grid.board
     puts  "Enter the squares for the two-unit ship:"
     puts ">"
       @human_coordinates_ship_1 = gets.chomp.upcase
     puts "Valid coordinates, now place your three-unit ship:"
       @human_coordinates_ship_2 = gets.chomp.upcase
 
+  end
+
+  def create_human_grid
+    @human_grid = Grid.new
   end
 
   def start_human_shots
@@ -87,25 +86,6 @@ attr_reader :human_coordinates_ship_1
       puts "Your shot hit"
     else
       puts "Your shot missed"
-    end
-  end
-
-  def store_h_on_grid
-    stored_h = @human_grid.rows.each do |row|
-      row_keys =  row[1].keys[1..5]
-      if row_keys.include?(@player_shot)
-        row[1][@player_shot] = "h"
-      end
-    end
-    stored_h
-  end
-  def store_m_on_grid
-    @human_grid.rows.each do |row|
-      row_keys =  row[1].keys[1..5]
-      if row_keys.include?(@player_shot) == false
-        row[1][@player_shot] = "m"
-        #we need to skip the row and go to next one if the player shot is not included in row
-      end
     end
   end
 end

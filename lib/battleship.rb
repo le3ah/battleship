@@ -4,10 +4,10 @@ require 'pry'
 class Game
 
 attr_reader :human_coordinates_ship_1
-
   def initialize
-    @answer
+    @grid = Grid.new(ships)
   end
+
 
   def welcome
     puts "Welcome to BATTLESHIP"
@@ -54,7 +54,7 @@ attr_reader :human_coordinates_ship_1
       The grid has A1 at the top left and D4 at the bottom right and looks like this:
       "
     create_human_grid
-    puts @human_grid.board
+    puts @human_grid.prints_board
     puts  "Enter the squares for the two-unit ship:"
     puts ">"
       @human_coordinates_ship_1 = gets.chomp.upcase

@@ -1,119 +1,108 @@
+require 'pry'
 class Computer
+attr_accessor :computer_grid
+attr_reader :map_ship_1, :map_ship_2
 
-attr_reader :random_sort_ship_1, :random_sort_ship_2
   def initialize
-  @computer_grid = ["A1", "A2", "A3", "A4",
-                  "B1", "B2", "B3", "B4",
-                  "C1", "C2", "C3", "C4",
-                  "D1", "D2", "D3", "D4"]
-  @computer_ship_1 = [@computer_ship_coordinate_1, @computer_ship_coordinate_2]
+    @computer_gird = Grid.new
+    ship1 = Ship.new(2, ["", ""])
+    ship2 = Ship.new(2, ["", ""])
+    @max_size = 4
+    @index_x = ["A","B","C","D"]
+    @index_y = ["1", "2", "3", "4"]
+    binding.pry
   end
 
-  def random_sort_ship_1
-    @computer_ship_coordinate_1 = @computer_grid.shuffle.pop
+  def computer_ship_1_coordinate_1
+    @index_x_1 = Random.rand(@max_size)
+    @index_y_1 = Random.rand(@max_size)
+    @computer_ship_1_coordinate_1 = [@index_x_1, @index_y_1]
   end
 
-  def create_new_grid
-    if @computer_ship_coordinate_1 == "A1"
-      @new_grid =["A2","B1"]
-    elsif @computer_ship_coordinate_1 == "A2"
-      @new_grid = ["A1", "B2", "A3"]
-    elsif @computer_ship_coordinate_1 == "A3"
-      @new_grid = ["A2", "B3", "A4"]
-    elsif @computer_ship_coordinate_1 == "A4"
-      @new_grid = ["A3", "B4"]
-    elsif @computer_ship_coordinate_1 == "B1"
-      @new_grid = ["A1", "B2", "C1"]
-    elsif @computer_ship_coordinate_1 == "B2"
-      @new_grid = ["A2", "B1", "B3", "C2"]
-    elsif @computer_ship_coordinate_1 == "B3"
-      @new_grid = ["A3", "B2", "B4", "C3"]
-    elsif @computer_ship_coordinate_1 == "B4"
-      @new_grid = ["A4", "B3", "C4"]
-    elsif @computer_ship_coordinate_1 == "C1"
-      @new_grid = ["B1", "C2", "D1"]
-    elsif @computer_ship_coordinate_1 == "C2"
-      @new_grid = ["B2", "C1", "C3", "D2"]
-    elsif @computer_ship_coordinate_1 == "C3"
-      @new_grid = ["B3", "C2", "C4", "D3"]
-    elsif @computer_ship_coordinate_1 == "C4"
-      @new_grid = ["B4", "C3", "D4"]
-    elsif @computer_ship_coordinate_1 == "D1"
-      @new_grid = ["C1", "D2"]
-    elsif @computer_ship_coordinate_1 == "D2"
-      @new_grid = ["C2", "D1", "D3"]
-    elsif @computer_ship_coordinate_1 == "D3"
-      @new_grid = ["C3", "D2", "D4"]
-    elsif @computer_ship_coordinate_1 == "D4"
-      @new_grid = ["C4", "D3"]
+  def pick_change_coordinate
+    @movement = ["change_x", "change_y"].sample
+  end
+
+  def second_coordinate(first)
+    if first == 0
+      second = 1
+    elsif first == 3
+      second = 2
+    else # first == 1 || first == 2
+      change_x = [-1,1].sample
+      second = change_x + first
     end
-    @new_grid
   end
 
-  def random_sort_ship_2
-    @computer_ship_coordinate_2 = @new_grid.shuffle.pop
+  def pick_coordinate_2
+    if @movement == "change_x"
+      @index_y_2 = @index_y_1
+      @index_x_2 = second_coordinate(@index_x_1)
+    else # @movement == "change_y"
+      @index_x_2 = @index_x_1
+      @index_y_2 = second_coordinate(@index_y_1)
+    end
+    @computer_ship_1_coordinate_2 = [@index_x_2, @index_y_2]
   end
 
-  def second_ship_coordinate_1
+  def ship_2_coordinate_1
     loop do
-      @computer_ship_2_coordinate_1 = @computer_grid.shuffle.pop
-      if @computer_ship_2_coordinate_1 != @computer_ship_coordinate_1 && @computer_ship_2_coordinate_1 != @computer_ship_coordinate_2
-          break
+      @index_x_3 = @index_x.index(@index_x.sample)
+      @index_y_3 = @index_y.index(@index_y.sample)
+      @computer_ship_2_coordinate_1 = [@index_x_3, @index_y_3]
+      if @computer_ship_2_coordinate_1 != @computer_ship_1_coordinate_1 &&
+        @computer_ship_2_coordinate_1 != @computer_ship_1_coordinate_2
+        break
       end
     end
     @computer_ship_2_coordinate_1
   end
 
-  def create_second_ship_grid
-    if @computer_ship_2_coordinate_1 == "A1"
-      @second_ship_grid =["A2","B2"]
-    elsif @computer_ship_2_coordinate_1 == "A2"
-      @second_ship_grid = ["A1", "B2", "A3"]
-    elsif @computer_ship_2_coordinate_1 == "A3"
-      @second_ship_grid = ["A2", "B3", "A4"]
-    elsif @computer_ship_2_coordinate_1 == "A4"
-      @second_ship_grid = ["A3", "B4"]
-    elsif @computer_ship_2_coordinate_1 == "B1"
-      @second_ship_grid = ["A1", "B2", "C1"]
-    elsif @computer_ship_2_coordinate_1 == "B2"
-      @second_ship_grid = ["A2", "B1", "B3", "C2"]
-    elsif @computer_ship_2_coordinate_1 == "B3"
-      @second_ship_grid = ["A3", "B2", "B4", "C3"]
-    elsif @computer_ship_2_coordinate_1 == "B4"
-      @second_ship_grid = ["A4", "B3", "C4"]
-    elsif @computer_ship_2_coordinate_1 == "C1"
-      @second_ship_grid = ["B1", "C2", "D1"]
-    elsif @computer_ship_2_coordinate_1 == "C2"
-      @second_ship_grid = ["B2", "C1", "C3", "D2"]
-    elsif @computer_ship_2_coordinate_1 == "C3"
-      @second_ship_grid = ["B3", "C2", "C4", "D3"]
-    elsif @computer_ship_2_coordinate_1 == "C4"
-      @second_ship_grid = ["B4", "C3", "D4"]
-    elsif @computer_ship_2_coordinate_1 == "D1"
-      @second_ship_grid = ["C1", "D2"]
-    elsif @computer_ship_2_coordinate_1 == "D2"
-      @second_ship_grid = ["C2", "D1", "D3"]
-    elsif @computer_ship_2_coordinate_1 == "D3"
-      @second_ship_grid = ["C3", "D2", "D4"]
-    elsif @computer_ship_2_coordinate_1 == "D4"
-      @second_ship_grid = ["C4", "D3"]
-    end
-    @second_ship_grid
+  def ship_2_coordinate_2
+    # loop do
+      if @movement == "change_x"
+        @index_y_4 = @index_y_3
+        @index_x_4 = second_coordinate(@index_x_3)
+      else
+        @index_x_4 = @index_x_3
+        @index_y_4 = second_coordinate(@index_y_3)
+      end
+        @computer_ship_2_coordinate_2 = [@index_x_4, @index_y_4]
+      # if @computer_ship_2_coordinate_2 != @computer_ship_1_coordinate_1 &&
+      #   @computer_ship_2_coordinate_2 != @computer_ship_1_coordinate_2 &&
+      #   @computer_ship_2_coordinate_2 != @computer_ship_2_coordinate_1
+      #   break
+      # end
+    # end
+    @computer_ship_2_coordinate_2 #= [@index_x_4, @index_y_4]
   end
 
-  def random_sort_ship_2_coordinate_2
-    loop do
-      @computer_ship_2_coordinate_2 = @second_ship_grid.shuffle.pop
-      if @computer_ship_2_coordinate_2 != @computer_ship_coordinate_1 && @computer_ship_2_coordinate_2 != @computer_ship_coordinate_2 && @computer_ship_2_coordinate_2 != @computer_ship_2_coordinate_1
-        break
-      end
+  def pick_coordinate_3(third, fourth)
+
+    if fourth == 3 || third == 3
+      fifth = 1
+    elsif fourth == 0 || third == 0
+      fifth = 2
+    else fifth = [0, 3].sample
     end
   end
-def move_vertically
-  index_1 = @computer_grid.index(@computer_ship_2_coordinate_1)
-  index_2 = @computer_grid.index(@computer_ship_2_coordinate_2)
-end
-def random_sort_ship_2_coodrinate_3
-end
-  # map through index position of grid 1 & 2
+
+  def ship_2_coordinate_3
+      if @index_x_3 == @index_x_4
+        @index_x_5 = @index_x_3
+        @index_y_5 = pick_coordinate_3(@index_y_3, @index_y_4)
+      else @index_y_5 = @index_y_3
+        @index_x_5 = pick_coordinate_3(@index_x_3, @index_x_4)
+      end
+     @computer_ship_2_coordinate_3 = [@index_x_5, @index_y_5]
+  end
+
+  def map_ship_1
+    @computer_ship_1 = [[@index_x[@index_x_1], @index_y[@index_y_1]], [@index_x[@index_x_2], @index_y[@index_y_2]]]
+  end
+
+  def map_ship_2
+    @computer_ship_2 = [[@index_x[@index_x_3], @index_y[@index_y_3]],[@index_x[@index_x_4], @index_y[@index_y_4]], [@index_x[@index_x_5], @index_y[@index_y_5]]]
+  end
+
 end

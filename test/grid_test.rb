@@ -26,4 +26,9 @@ class GridTest < Minitest::Test
     assert_equal true, ai_grid.ship_1_is_vertical_or_horizontal(["A","1"],["B","1"])
   end
 
+  def test_ship_2_is_vertical_or_horizontal
+    ai_grid = Grid.new
+    assert_equal true, ai_grid.ship_1_is_vertical_or_horizontal(["A","1"],["C","1"])
+  end
+
 end

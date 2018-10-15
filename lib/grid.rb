@@ -73,14 +73,26 @@ class Grid
       @index_x.index(first.first) - @index_x.index(last.first) == -1 ||
       @index_x.index(first.first) - @index_x.index(last.first) == 1
       true
-    elsif @index_y.index(first.first) - @index_y.index(last.first) == 0 ||
-      @index_y.index(first.first) - @index_y.index(last.first) == -1 ||
-      @index_y.index(first.first) - @index_y.index(last.first) == 1
+    elsif @index_y.index(first.last) - @index_y.index(last.last) == 0 ||
+      @index_y.index(first.last) - @index_y.index(last.last) == -1 ||
+      @index_y.index(first.last) - @index_y.index(last.last) == 1
       true
     else
     end
-
   end
+
+    def ship_2_is_vertical_or_horizontal(first,last)
+      if @index_x.index(first.first) - @index_x.index(last.first) == 0 ||
+        @index_x.index(first.first) - @index_x.index(last.first) == -2 ||
+        @index_x.index(first.first) - @index_x.index(last.first) == 2
+        true
+      elsif @index_y.index(first.last) - @index_y.index(last.last) == 0 ||
+        @index_y.index(first.last) - @index_y.index(last.last) == -2 ||
+        @index_y.index(first.last) - @index_y.index(last.last) == 2
+        true
+      else
+      end
+    end
 
 
 end

@@ -7,6 +7,7 @@ class Grid
 #and how the board is printed with the shot information
 #consider making the board structure an instance variable to hold the data for shots
   def initialize
+    @all_ships = []
     @rows = { "A" => {
       "A" => "A",
       "1" => " ",
@@ -52,16 +53,24 @@ class Grid
     puts "============
     "
   end
+  def get_human_coordinates_for_ship(@human_coordinates_ship_1, @human_coordinates_ship_2)
+
+  end
+
+  def create_ships(player,coordinates)
+    ship = Ship.new(player, coordinates)
+    @all_ships << ship
+  end
 
   def get_all_computer_ship_coordinates
      all_ship_coordinates = []
-     @computer_ships.each do |ship|
+     @all_ships.each do |ship|
        all_ship_coordinates << ship.coordinates
      end
      all_ship_coordinates
   end
 
-  def validate_ships_cannot_overlap
+  def validate_hit
      ship2.coordinates.each do |coordinate|
          ship1.include?(coordinate)
          puts "Your previous ship is in that spot, pick another ship position"
@@ -69,7 +78,9 @@ class Grid
      end
   end
 
-  def validate_that_ship_coordinates_dont_wrap_around
+  def tell_ship_it_is_hit
+    if validate_hit == true
+
 
   end
 

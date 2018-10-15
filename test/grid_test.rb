@@ -15,4 +15,10 @@ class GridTest < Minitest::Test
     human_grid.store_h_on_grid("A1")
     assert_equal "H" , human_grid.rows["A"]["1"]
   end
+
+  def test_coordinates_on_grid
+    ai_grid = Grid.new
+    assert_equal "Coordinate exists on board.", ai_grid.ships_on_grid(["A","1"])
+  end
+
 end

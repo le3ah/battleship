@@ -1,6 +1,6 @@
 class Computer
 
-attr_reader :map_ship_1, :map_ship_2
+attr_reader :map_ship_1, :map_ship_2, :index_x, :index_y
   def initialize
     @max_size = 4
     @index_x = ["A","B","C","D"]

@@ -41,6 +41,8 @@ class Grid
         "4" => " "
       }
     }
+    @index_x = ["A","B","C","D"]
+    @index_y = ["1", "2", "3", "4"]
   end
 
   def prints_board
@@ -60,14 +62,25 @@ class Grid
   end
 
   def ships_on_grid(coordinate)
-    @index_x = ["A","B","C","D"]
-    @index_y = ["1", "2", "3", "4"]
     if @index_x.index(coordinate.first) != nil && @index_y.index(coordinate.last) != nil
-      "Coordinate exists on board."
+      true
     else
-      "Coordinate does not exist on board.  Please try again."
+    end
+  end
+
+  def ship_1_is_vertical_or_horizontal(first,last)
+    if @index_x.index(first.first) - @index_x.index(last.first) == 0 ||
+      @index_x.index(first.first) - @index_x.index(last.first) == -1 ||
+      @index_x.index(first.first) - @index_x.index(last.first) == 1
+      true
+    elsif @index_y.index(first.first) - @index_y.index(last.first) == 0 ||
+      @index_y.index(first.first) - @index_y.index(last.first) == -1 ||
+      @index_y.index(first.first) - @index_y.index(last.first) == 1
+      true
+    else
     end
 
   end
+
 
 end

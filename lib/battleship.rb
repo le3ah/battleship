@@ -1,14 +1,8 @@
-require "./lib/grid.rb"
-require "./lib/ship.rb"
+require "./lib/player.rb"
 require 'pry'
 class Game
 
 attr_reader :human_coordinates_ship_1
-  def initialize
-    @grid = Grid.new(ships)
-  end
-
-
   def welcome
     puts "Welcome to BATTLESHIP"
   end
@@ -46,6 +40,7 @@ attr_reader :human_coordinates_ship_1
   end
 
   def player_human_place_ships
+    player = Player.new
 
     puts  "I have laid out my ships on the grid.
       You now need to layout your two ships.
@@ -89,3 +84,5 @@ attr_reader :human_coordinates_ship_1
     end
   end
 end
+game = Game.new
+game.player_human_place_ships

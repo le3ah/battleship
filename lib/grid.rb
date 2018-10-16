@@ -63,70 +63,79 @@ class Grid
   end
 
   def ships_on_grid(coordinate)
-    coordinate.map do |x|
+    result = coordinate.map do |x|
     @index_x.index(x.split("").first) != nil &&
       @index_y.index(x.split("").last) != nil
     end
-  end
-
-  def ship_1_is_vertical_or_horizontal(coordinate)
-    first = coordinate.first.split("")
-    last = coordinate.last.split("")
-    if @index_x.index(first.first) - @index_x.index(last.first) == 0 ||
-      @index_x.index(first.first) - @index_x.index(last.first) == -1 ||
-      @index_x.index(first.first) - @index_x.index(last.first) == 1
+    if result[0] || result[1]
       true
-    elsif @index_y.index(first.last) - @index_y.index(last.last) == 0 ||
-      @index_y.index(first.last) - @index_y.index(last.last) == -1 ||
-      @index_y.index(first.last) - @index_y.index(last.last) == 1
+    elsif result[0] || result[2]
       true
-    else false
-    end
-  end
-
-  def ship_2_is_vertical_or_horizontal(coordinate)
-    first = coordinate.first.split("")
-    last = coordinate.last.split("")
-    if @index_x.index(first.first) - @index_x.index(last.first) == 0 ||
-      @index_x.index(first.first) - @index_x.index(last.first) == -2 ||
-      @index_x.index(first.first) - @index_x.index(last.first) == 2
-      true
-    elsif @index_y.index(first.last) - @index_y.index(last.last) == 0 ||
-      @index_y.index(first.last) - @index_y.index(last.last) == -2 ||
-      @index_y.index(first.last) - @index_y.index(last.last) == 2
-      true
-    else false
-    end
-  end
-
-  def ships_not_diagonal(coordinate)
-    first = coordinate.first.split("")
-    last = coordinate.last.split("")
-    if @index_x.index(first.first) - @index_x.index(last.first) == 0
-      @index_y.index(first.last) - @index_y.index(last.last) == -1 ||
-      @index_y.index(first.last) - @index_y.index(last.last) == 1 ||
-      @index_y.index(first.last) - @index_y.index(last.last) == -2 ||
-      @index_y.index(first.last) - @index_y.index(last.last) == 2
     else
-      @index_x.index(first.first) - @index_x.index(last.first) == -1 ||
-      @index_x.index(first.first) - @index_x.index(last.first) == 1 ||
-      @index_x.index(first.first) - @index_x.index(last.first) == -2 ||
-      @index_x.index(first.first) - @index_x.index(last.first) == 2
+    end 
+  end
+
+  def coordinate_split(coordinate)
+    first = coordinate.first.split("")
+    last = coordinate.last.split("")
+    @x_coordinate = @index_x.index(first.first) - @index_x.index(last.first)
+    @y_coordinate = @index_y.index(first.last) - @index_y.index(last.last)
+  end
+
+  def ship_1_is_vertical_or_horizontal?(coordinate)
+    coordinate_split(coordinate)
+    if @x_coordinate == 0 ||
+      @x_coordinate == -1 ||
+      @x_coordinate == 1
+      true
+    elsif @y_coordinate == 0 ||
+      @y_coordinate == -1 ||
+      @y_coordinate == 1
+      true
+    else false
     end
   end
 
-  def ships_cannot_wrap(coordinate)
-    first = coordinate.first.split("")
-    last = coordinate.last.split("")
-    if @index_x.index(first.first) - @index_x.index(last.first) == 3
+  def ship_2_is_vertical_or_horizontal?(coordinate)
+    coordinate_split(coordinate)
+    if @x_coordinate == 0 ||
+      @x_coordinate == -2 ||
+      @x_coordinate == 2
+      true
+    elsif @y_coordinate == 0 ||
+      @y_coordinate == -2 ||
+      @y_coordinate == 2
+      true
+    else false
+    end
+  end
+
+  def ships_not_diagonal?(coordinate)
+    coordinate_split(coordinate)
+    if @x_coordinate  == 0
+      @y_coordinate == -1 ||
+      @y_coordinate == 1 ||
+      @y_coordinate == -2 ||
+      @y_coordinate == 2
+    else
+      @x_coordinate  == -1 ||
+      @x_coordinate  == 1 ||
+      @x_coordinate  == -2 ||
+      @x_coordinate  == 2
+    end
+  end
+
+  def ships_cannot_wrap?(coordinate)
+    coordinate_split(coordinate)
+    if @x_coordinate  == 3
       false
-    elsif @index_y.index(first.last) - @index_y.index(last.last) == 3
+    elsif @y_coordinate == 3
       false
     else true
     end
   end
 
-  def ships_cannot_overlap(ship_1, ship_2)
+  def ships_cannot_overlap?(ship_1, ship_2)
     if ship_1[0] != ship_1[1] &&
       ship_1[0] != ship_2[0] &&
       ship_1[0] != ship_2[1] &&
@@ -142,17 +151,17 @@ class Grid
     end
   end
 
-  # def validate
-  #   if ships_on_grid(coordinate) == true &&
-  #     ship_1_is_vertical_or_horizontal(first,last) == true &&
-  #     ship_2_is_vertical_or_horizontal(first,last) == true &&
-  #     ships_not_diagonal(first,last) == true &&
-  #     ships_cannot_wrap(first,last) == true &&
-  #     ships_cannot_overlap(first, second, third, fourth, fifth) == true
-  #     p "Ship coordinates are valid."
-  #   else
-  #     p "Ship coordinates are not valid."
-  #   end
-  # end
+  def validate
+    if ships_on_grid(coordinate) == true &&
+      ship_1_is_vertical_or_horizontal(first,last) == true &&
+      ship_2_is_vertical_or_horizontal(first,last) == true &&
+      ships_not_diagonal(first,last) == true &&
+      ships_cannot_wrap(first,last) == true &&
+      ships_cannot_overlap(first, second, third, fourth, fifth) == true
+      p "Ship coordinates are valid."
+    else
+      p "Ship coordinates are not valid."
+    end
+  end
 
 end

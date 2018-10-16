@@ -1,6 +1,6 @@
 class Computer
 
-attr_reader :map_ship_1, :map_ship_2
+attr_reader :map_ship_1, :map_ship_2, :index_x, :index_y
   def initialize
     @max_size = 4
     @index_x = ["A","B","C","D"]
@@ -93,10 +93,10 @@ attr_reader :map_ship_1, :map_ship_2
   end
 
   def map_ship_1
-    @computer_ship_1 = [[@index_x[@index_x_1], @index_y[@index_y_1]], [@index_x[@index_x_2], @index_y[@index_y_2]]]
+    @computer_ship_1 = [[@index_x[@index_x_1], @index_y[@index_y_1]].join, [@index_x[@index_x_2], @index_y[@index_y_2]].join]
   end
 
   def map_ship_2
-    @computer_ship_2 = [[@index_x[@index_x_3], @index_y[@index_y_3]],[@index_x[@index_x_4], @index_y[@index_y_4]], [@index_x[@index_x_5], @index_y[@index_y_5]]]
+    @computer_ship_2 = [[@index_x[@index_x_3], @index_y[@index_y_3]].join,[@index_x[@index_x_4], @index_y[@index_y_4]].join, [@index_x[@index_x_5], @index_y[@index_y_5]].join]
   end
 end

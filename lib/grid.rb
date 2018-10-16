@@ -41,6 +41,8 @@ class Grid
         "4" => " "
       }
     }
+    @index_x = ["A","B","C","D"]
+    @index_y = ["1", "2", "3", "4"]
   end
 
   def prints_board
@@ -62,31 +64,45 @@ class Grid
     @all_ships << ship
   end
 
-  def get_all_computer_ship_coordinates
-     all_ship_coordinates = []
-     @all_ships.each do |ship|
-       all_ship_coordinates << ship.coordinates
-     end
-     all_ship_coordinates
-  end
-
-  def validate_hit
-     ship2.coordinates.each do |coordinate|
-         ship1.include?(coordinate)
-         puts "Your previous ship is in that spot, pick another ship position"
-        # here I need to call the method that prompts for new coordinates for the second ship
-     end
-  end
-
-  def tell_ship_it_is_hit
-    if validate_hit == true
-
-
-  end
-
   def store_h_on_grid(coordinate)
     x , y = coordinate.chars
     rows[x][y] = "H"
   end
+
+  def ships_on_grid(coordinate)
+    if @index_x.index(coordinate.first) != nil && @index_y.index(coordinate.last) != nil
+      true
+    else
+    end
+  end
+
+  def ship_1_is_vertical_or_horizontal(first,last)
+    if @index_x.index(first.first) - @index_x.index(last.first) == 0 ||
+      @index_x.index(first.first) - @index_x.index(last.first) == -1 ||
+      @index_x.index(first.first) - @index_x.index(last.first) == 1
+      true
+    elsif @index_y.index(first.last) - @index_y.index(last.last) == 0 ||
+      @index_y.index(first.last) - @index_y.index(last.last) == -1 ||
+      @index_y.index(first.last) - @index_y.index(last.last) == 1
+      true
+    else
+    end
+
+  
+  end
+
+    def ship_2_is_vertical_or_horizontal(first,last)
+      if @index_x.index(first.first) - @index_x.index(last.first) == 0 ||
+        @index_x.index(first.first) - @index_x.index(last.first) == -2 ||
+        @index_x.index(first.first) - @index_x.index(last.first) == 2
+        true
+      elsif @index_y.index(first.last) - @index_y.index(last.last) == 0 ||
+        @index_y.index(first.last) - @index_y.index(last.last) == -2 ||
+        @index_y.index(first.last) - @index_y.index(last.last) == 2
+        true
+      else
+      end
+    end
+
 
 end

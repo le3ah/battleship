@@ -1,12 +1,14 @@
 require "./lib/player.rb"
 require 'pry'
-class Game
 
-attr_reader :human_coordinates_ship_1
+class Game
+  attr_reader :human_coordinates_ship_1
+
   def initialize
     @computer = Computer.new
     @human = Human.new
   end
+
   def welcome
     puts "Welcome to BATTLESHIP"
   end
@@ -54,12 +56,14 @@ attr_reader :human_coordinates_ship_1
       "
     create_human_grid
     puts @human_grid.prints_board
-    puts  "Enter the squares for the two-unit ship:"
+    puts  "Enter the squares for the two-unit ship:
+     please use a capital letter and number separates by a space followed by another capital letter and number like this: A1 A2"
     puts ">"
-      @human_coordinates_ship_1 = gets.chomp.upcase
+      @human_coordinates_ship_1 = gets.chomp.split
       @human.human_grid.create_ships("human", @human_coordinates_ship_1)
-    puts "Valid coordinates, now place your three-unit ship:"
-      @human_coordinates_ship_2 = gets.chomp.upcase
+    puts "Valid coordinates, now place your three-unit ship:
+    please use a capital letter and number separates by a space followed by another capital letter and number like this: A1 A2"
+      @human_coordinates_ship_2 = gets.chomp.split
   end
 
   def create_human_grid

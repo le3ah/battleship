@@ -53,6 +53,7 @@ attr_reader :human_coordinates_ship_1
     puts  "Enter the squares for the two-unit ship:"
     puts ">"
       @human_coordinates_ship_1 = gets.chomp.upcase
+
     puts "Valid coordinates, now place your three-unit ship:"
       @human_coordinates_ship_2 = gets.chomp.upcase
 

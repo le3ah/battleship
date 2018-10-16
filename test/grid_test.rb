@@ -31,4 +31,14 @@ class GridTest < Minitest::Test
     assert_equal true, ai_grid.ship_1_is_vertical_or_horizontal(["A","1"],["C","1"])
   end
 
+  def test_ships_are_not_diagonal
+    ai_grid = Grid.new
+    assert_equal true, ai_grid.ships_not_diagonal(["A","1"],["C","1"])
+    assert_equal true, ai_grid.ships_not_diagonal(["B","2"],["B","3"])
+  end
+  def test_ships_cannot_wrap
+    ai_grid = Grid.new
+    assert_equal true, ai_grid.ships_cannot_wrap(["D","1"], ["D","2"])
+    assert_equal false, ai_grid.ships_cannot_wrap(["A","1"], ["D","1"])
+  end
 end

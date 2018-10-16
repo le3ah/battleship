@@ -62,7 +62,7 @@ class Grid
     rows[x][y] = "H"
   end
 
-  def ships_on_grid(coordinate)
+  def ships_on_grid?(coordinate)
     result = coordinate.map do |x|
     @index_x.index(x.split("").first) != nil &&
       @index_y.index(x.split("").last) != nil
@@ -72,7 +72,7 @@ class Grid
     elsif result[0] || result[2]
       true
     else
-    end 
+    end
   end
 
   def coordinate_split(coordinate)
@@ -151,13 +151,16 @@ class Grid
     end
   end
 
-  def validate
-    if ships_on_grid(coordinate) == true &&
-      ship_1_is_vertical_or_horizontal(first,last) == true &&
-      ship_2_is_vertical_or_horizontal(first,last) == true &&
-      ships_not_diagonal(first,last) == true &&
-      ships_cannot_wrap(first,last) == true &&
-      ships_cannot_overlap(first, second, third, fourth, fifth) == true
+  def validate(ship_1, ship_2)
+    if ships_on_grid?(ship_1) == true &&
+      ships_on_grid?(ship_2) == true &&
+      ship_1_is_vertical_or_horizontal?(ship_1) == true &&
+      ship_2_is_vertical_or_horizontal?(ship_2) == true &&
+      ships_not_diagonal?(ship_1) == true &&
+      ships_not_diagonal?(ship_2) == true &&
+      ships_cannot_wrap?(ship_1) == true &&
+      ships_cannot_wrap?(ship_2) == true &&
+      ships_cannot_overlap?(ship_1, ship_2) == true
       p "Ship coordinates are valid."
     else
       p "Ship coordinates are not valid."

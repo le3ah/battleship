@@ -22,8 +22,8 @@ class GridTest < Minitest::Test
     computer = Computer.new
     ship_1 = computer.map_ship_1
     ship_2 = computer.map_ship_2
-    assert_equal true, ai_grid.ships_on_grid(ship_1)
-    assert_equal true, ai_grid.ships_on_grid(ship_2)
+    assert_equal true, ai_grid.ships_on_grid?(ship_1)
+    assert_equal true, ai_grid.ships_on_grid?(ship_2)
   end
 
   def test_ship_1_is_vertical_or_horizontal
@@ -64,6 +64,23 @@ class GridTest < Minitest::Test
     ship_1 = computer.map_ship_1
     ship_2 = computer.map_ship_2
     assert_equal true, ai_grid.ships_cannot_overlap?(ship_1, ship_2)
+  end
+
+  def test_all_coordinates_pass_validation
+    ai_grid = Grid.new
+    computer = Computer.new
+    ship_1 = computer.map_ship_1
+    ship_2 = computer.map_ship_2
+    ai_grid.ships_on_grid?(ship_1)
+    ai_grid.ships_on_grid?(ship_2)
+    ai_grid.coordinate_split(ship_1)
+    ai_grid.coordinate_split(ship_2)
+    ai_grid.ship_1_is_vertical_or_horizontal?(ship_1)
+    ai_grid.ship_2_is_vertical_or_horizontal?(ship_2)
+    ai_grid.ships_not_diagonal?(ship_1)
+    ai_grid.ships_not_diagonal?(ship_2)
+    ai_grid.ships_cannot_overlap?(ship_1, ship_2)
+    assert_equal "Ship coordinates are valid.", ai_grid.validate(ship_1, ship_2)
   end
 
 end

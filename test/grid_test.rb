@@ -3,6 +3,7 @@ require 'minitest/pride'
 #require './lib/ship.rb'
 require './lib/grid.rb'
 require 'pry'
+require './lib/computer_playground'
 class GridTest < Minitest::Test
 
   def test_grid_exists
@@ -18,7 +19,19 @@ class GridTest < Minitest::Test
 
   def test_coordinates_on_grid
     ai_grid = Grid.new
-    assert_equal true, ai_grid.ships_on_grid(["A","1"])
+    computer = Computer.new
+    computer.pick_change_coordinate
+    computer.computer_ship_1_coordinate_1
+    computer.pick_coordinate_2
+    computer.ship_2_coordinate_1
+    computer.ship_2_coordinate_2
+    computer.pick_coordinate_3(computer.ship_2_coordinate_1[0], computer.ship_2_coordinate_2[0])
+    computer.pick_coordinate_3(computer.ship_2_coordinate_1[1], computer.ship_2_coordinate_2[1])
+    computer.ship_2_coordinate_3
+    ship_1 = computer.map_ship_1
+    ship_2 = computer.map_ship_2
+    assert_equal [true, true], ai_grid.ships_on_grid?(ship_1)
+    assert_equal [true,true,true], ai_grid.ships_on_grid?(ship_2)
   end
 
   def test_ship_1_is_vertical_or_horizontal
@@ -41,4 +54,10 @@ class GridTest < Minitest::Test
     assert_equal true, ai_grid.ships_cannot_wrap(["D","1"], ["D","2"])
     assert_equal false, ai_grid.ships_cannot_wrap(["A","1"], ["D","1"])
   end
+  def test_ships_are_not_equal
+    ai_grid = Grid.new
+    assert_equal true, ai_grid.ships_cannot_overlap(["A","4"], ["B", "4"], ["D","1"], ["D", "2"], ["D","3"])
+    assert_equal false, ai_grid.ships_cannot_overlap(["C","1"], ["D", "1"], ["D","1"], ["D", "2"], ["D","3"])
+  end
+
 end

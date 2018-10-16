@@ -1,5 +1,6 @@
 require 'pry'
 require "./lib/ship.rb"
+require './lib/computer_playground'
 
 class Grid
  attr_reader :rows, :ships
@@ -61,10 +62,10 @@ class Grid
     rows[x][y] = "H"
   end
 
-  def ships_on_grid(coordinate)
-    if @index_x.index(coordinate.first) != nil && @index_y.index(coordinate.last) != nil
-      true
-    else
+  def ships_on_grid?(coordinate)
+    coordinate.map do |x|
+    @index_x.index(x.split("").first) != nil &&
+      @index_y.index(x.split("").last) != nil
     end
   end
 
@@ -77,7 +78,7 @@ class Grid
       @index_y.index(first.last) - @index_y.index(last.last) == -1 ||
       @index_y.index(first.last) - @index_y.index(last.last) == 1
       true
-    else
+    else false
     end
   end
 
@@ -90,7 +91,7 @@ class Grid
       @index_y.index(first.last) - @index_y.index(last.last) == -2 ||
       @index_y.index(first.last) - @index_y.index(last.last) == 2
       true
-    else
+    else false
     end
   end
 
@@ -117,9 +118,37 @@ class Grid
       @index_y.index(last.last) != 3
     elsif @index_y.index(first.last) == 3
       @index_y.index(last.last) != 0
-    else
+    else false
     end
   end
 
+  def ships_cannot_overlap(first, second, third, fourth, fifth)
+    if first != second &&
+      first != third &&
+      first != fourth &&
+      first != fifth &&
+      second != third &&
+      second != fourth &&
+      second != fifth &&
+      third != fourth &&
+      third != fifth &&
+      fourth != fifth
+      true
+    else false
+    end
+  end
+
+  # def validate
+  #   if ships_on_grid(coordinate) == true &&
+  #     ship_1_is_vertical_or_horizontal(first,last) == true &&
+  #     ship_2_is_vertical_or_horizontal(first,last) == true &&
+  #     ships_not_diagonal(first,last) == true &&
+  #     ships_cannot_wrap(first,last) == true &&
+  #     ships_cannot_overlap(first, second, third, fourth, fifth) == true
+  #     p "Ship coordinates are valid."
+  #   else
+  #     p "Ship coordinates are not valid."
+  #   end
+  # end
 
 end

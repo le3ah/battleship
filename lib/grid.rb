@@ -7,7 +7,7 @@ class Grid
 #and how the board is printed with the shot information
 #consider making the board structure an instance variable to hold the data for shots
   def initialize
-    @ships = ships
+    @all_ships = []
     @rows = { "A" => {
       "A" => "A",
       "1" => " ",
@@ -55,6 +55,14 @@ class Grid
     puts "============
     "
   end
+  def get_human_coordinates_for_ship(@human_coordinates_ship_1, @human_coordinates_ship_2)
+
+  end
+
+  def create_ships(player,coordinates)
+    ship = Ship.new(player, coordinates)
+    @all_ships << ship
+  end
 
   def store_h_on_grid(coordinate)
     x , y = coordinate.chars
@@ -79,6 +87,8 @@ class Grid
       true
     else
     end
+
+  
   end
 
     def ship_2_is_vertical_or_horizontal(first,last)

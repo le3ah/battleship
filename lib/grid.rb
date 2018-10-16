@@ -2,10 +2,8 @@ require 'pry'
 require "./lib/ship.rb"
 
 class Grid
- attr_reader :rows, :ships
-#determine how you are going to store the shot information on the board
-#and how the board is printed with the shot information
-#consider making the board structure an instance variable to hold the data for shots
+ attr_reader :rows, :all_ships
+
   def initialize
     @all_ships = []
     @rows = { "A" => {
@@ -53,7 +51,8 @@ class Grid
     puts "============
     "
   end
-  def get_human_coordinates_for_ship(@human_coordinates_ship_1, @human_coordinates_ship_2)
+
+  def get_human_coordinates_for_ship(human_coordinates_ship_1, human_coordinates_ship_2)
 
   end
 
@@ -70,23 +69,21 @@ class Grid
      all_ship_coordinates
   end
 
-  def validate_hit
-     ship2.coordinates.each do |coordinate|
-         ship1.include?(coordinate)
-         puts "Your previous ship is in that spot, pick another ship position"
-        # here I need to call the method that prompts for new coordinates for the second ship
-     end
-  end
-
-  def tell_ship_it_is_hit
-    if validate_hit == true
-
-
-  end
-
-  def store_h_on_grid(coordinate)
-    x , y = coordinate.chars
-    rows[x][y] = "H"
-  end
+  # def validate_hit
+  #    ship2.coordinates.each do |coordinate|
+  #        ship1.include?(coordinate)
+  #        puts "Your previous ship is in that spot, pick another ship position"
+  #       # here I need to call the method that prompts for new coordinates for the second ship
+  #    end
+  # end
+  #
+  # def tell_ship_it_is_hit
+  #   if validate_hit == true
+  # end
+  #
+  # def store_h_on_grid(coordinate)
+  #   x , y = coordinate.chars
+  #   rows[x][y] = "H"
+  # end
 
 end

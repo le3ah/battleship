@@ -11,8 +11,4 @@ class Ship
   def get_ship_size
     @coordinates.count
   end
-
-  def
-
-  end
 end

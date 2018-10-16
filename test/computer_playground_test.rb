@@ -79,6 +79,8 @@ def test_ships_map_correctly
   computer.pick_coordinate_3(computer.ship_2_coordinate_1[1], computer.ship_2_coordinate_2[1])
   computer.ship_2_coordinate_3
   assert_equal 2, computer.map_ship_1.count
+  require 'pry'
+  binding.pry
   assert_equal 3, computer.map_ship_2.count
 end
 

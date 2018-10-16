@@ -22,34 +22,48 @@ class GridTest < Minitest::Test
     computer = Computer.new
     ship_1 = computer.map_ship_1
     ship_2 = computer.map_ship_2
-    assert_equal [true, true], ai_grid.ships_on_grid?(ship_1)
-    assert_equal [true,true,true], ai_grid.ships_on_grid?(ship_2)
+    assert_equal [true, true], ai_grid.ships_on_grid(ship_1)
+    assert_equal [true,true,true], ai_grid.ships_on_grid(ship_2)
   end
 
   def test_ship_1_is_vertical_or_horizontal
     ai_grid = Grid.new
-    assert_equal true, ai_grid.ship_1_is_vertical_or_horizontal(["A","1"],["B","1"])
+    computer = Computer.new
+    ship_1 = computer.map_ship_1
+    assert_equal true, ai_grid.ship_1_is_vertical_or_horizontal(ship_1)
   end
 
   def test_ship_2_is_vertical_or_horizontal
     ai_grid = Grid.new
-    assert_equal true, ai_grid.ship_1_is_vertical_or_horizontal(["A","1"],["C","1"])
+    computer = Computer.new
+    ship_2 = computer.map_ship_2
+    assert_equal true, ai_grid.ship_1_is_vertical_or_horizontal(ship_2)
   end
 
   def test_ships_are_not_diagonal
     ai_grid = Grid.new
-    assert_equal true, ai_grid.ships_not_diagonal(["A","1"],["C","1"])
-    assert_equal true, ai_grid.ships_not_diagonal(["B","2"],["B","3"])
+    computer = Computer.new
+    ship_1 = computer.map_ship_1
+    ship_2 = computer.map_ship_2
+    assert_equal true, ai_grid.ships_not_diagonal(ship_1)
+    assert_equal true, ai_grid.ships_not_diagonal(ship_2)
   end
+
   def test_ships_cannot_wrap
     ai_grid = Grid.new
-    assert_equal true, ai_grid.ships_cannot_wrap(["D","1"], ["D","2"])
-    assert_equal false, ai_grid.ships_cannot_wrap(["A","1"], ["D","1"])
+    computer = Computer.new
+    ship_1 = computer.map_ship_1
+    ship_2 = computer.map_ship_2
+    assert_equal true, ai_grid.ships_cannot_wrap(ship_1)
+    assert_equal true, ai_grid.ships_cannot_wrap(ship_2)
   end
+
   def test_ships_are_not_equal
     ai_grid = Grid.new
-    assert_equal true, ai_grid.ships_cannot_overlap(["A","4"], ["B", "4"], ["D","1"], ["D", "2"], ["D","3"])
-    assert_equal false, ai_grid.ships_cannot_overlap(["C","1"], ["D", "1"], ["D","1"], ["D", "2"], ["D","3"])
+    computer = Computer.new
+    ship_1 = computer.map_ship_1
+    ship_2 = computer.map_ship_2
+    assert_equal true, ai_grid.ships_cannot_overlap(ship_1, ship_2)
   end
 
 end

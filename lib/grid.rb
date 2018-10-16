@@ -62,14 +62,16 @@ class Grid
     rows[x][y] = "H"
   end
 
-  def ships_on_grid?(coordinate)
+  def ships_on_grid(coordinate)
     coordinate.map do |x|
     @index_x.index(x.split("").first) != nil &&
       @index_y.index(x.split("").last) != nil
     end
   end
 
-  def ship_1_is_vertical_or_horizontal(first,last)
+  def ship_1_is_vertical_or_horizontal(coordinate)
+    first = coordinate.first.split("")
+    last = coordinate.last.split("")
     if @index_x.index(first.first) - @index_x.index(last.first) == 0 ||
       @index_x.index(first.first) - @index_x.index(last.first) == -1 ||
       @index_x.index(first.first) - @index_x.index(last.first) == 1
@@ -82,7 +84,9 @@ class Grid
     end
   end
 
-  def ship_2_is_vertical_or_horizontal(first,last)
+  def ship_2_is_vertical_or_horizontal(coordinate)
+    first = coordinate.first.split("")
+    last = coordinate.last.split("")
     if @index_x.index(first.first) - @index_x.index(last.first) == 0 ||
       @index_x.index(first.first) - @index_x.index(last.first) == -2 ||
       @index_x.index(first.first) - @index_x.index(last.first) == 2
@@ -95,7 +99,9 @@ class Grid
     end
   end
 
-  def ships_not_diagonal(first,last)
+  def ships_not_diagonal(coordinate)
+    first = coordinate.first.split("")
+    last = coordinate.last.split("")
     if @index_x.index(first.first) - @index_x.index(last.first) == 0
       @index_y.index(first.last) - @index_y.index(last.last) == -1 ||
       @index_y.index(first.last) - @index_y.index(last.last) == 1 ||
@@ -109,30 +115,28 @@ class Grid
     end
   end
 
-  def ships_cannot_wrap(first,last)
-    if @index_x.index(first.first) == 0
-      @index_x.index(last.first) != 3
-    elsif @index_x.index(first.first) == 3
-      @index_x.index(last.first) != 0
-    elsif @index_y.index(first.last) == 0
-      @index_y.index(last.last) != 3
-    elsif @index_y.index(first.last) == 3
-      @index_y.index(last.last) != 0
-    else false
+  def ships_cannot_wrap(coordinate)
+    first = coordinate.first.split("")
+    last = coordinate.last.split("")
+    if @index_x.index(first.first) - @index_x.index(last.first) == 3
+      false
+    elsif @index_y.index(first.last) - @index_y.index(last.last) == 3
+      false
+    else true
     end
   end
 
-  def ships_cannot_overlap(first, second, third, fourth, fifth)
-    if first != second &&
-      first != third &&
-      first != fourth &&
-      first != fifth &&
-      second != third &&
-      second != fourth &&
-      second != fifth &&
-      third != fourth &&
-      third != fifth &&
-      fourth != fifth
+  def ships_cannot_overlap(ship_1, ship_2)
+    if ship_1[0] != ship_1[1] &&
+      ship_1[0] != ship_2[0] &&
+      ship_1[0] != ship_2[1] &&
+      ship_1[0] != ship_2[2] &&
+      ship_1[1] != ship_2[0] &&
+      ship_1[1] != ship_2[1] &&
+      ship_1[1] != ship_2[2] &&
+      ship_2[0] != ship_2[1] &&
+      ship_2[0] != ship_2[2] &&
+      ship_2[1] != ship_2[2]
       true
     else false
     end

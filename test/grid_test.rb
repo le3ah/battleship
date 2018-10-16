@@ -20,14 +20,6 @@ class GridTest < Minitest::Test
   def test_coordinates_on_grid
     ai_grid = Grid.new
     computer = Computer.new
-    computer.pick_change_coordinate
-    computer.computer_ship_1_coordinate_1
-    computer.pick_coordinate_2
-    computer.ship_2_coordinate_1
-    computer.ship_2_coordinate_2
-    computer.pick_coordinate_3(computer.ship_2_coordinate_1[0], computer.ship_2_coordinate_2[0])
-    computer.pick_coordinate_3(computer.ship_2_coordinate_1[1], computer.ship_2_coordinate_2[1])
-    computer.ship_2_coordinate_3
     ship_1 = computer.map_ship_1
     ship_2 = computer.map_ship_2
     assert_equal [true, true], ai_grid.ships_on_grid?(ship_1)

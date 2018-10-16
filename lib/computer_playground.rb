@@ -1,6 +1,6 @@
 class Computer
 
-attr_reader :map_ship_1, :map_ship_2, :index_x, :index_y
+attr_reader :map_ship_1, :map_ship_2, :index_x, :index_y, :computer_fires_missile
   def initialize
     @max_size = 4
     @index_x = ["A","B","C","D"]
@@ -24,6 +24,10 @@ attr_reader :map_ship_1, :map_ship_2, :index_x, :index_y
     pick_coordinate_3(ship_2_coordinate_1[1], ship_2_coordinate_2[1])
     ship_2_coordinate_3
     @computer_ship_2 = [[@index_x[@index_x_3], @index_y[@index_y_3]].join,[@index_x[@index_x_4], @index_y[@index_y_4]].join, [@index_x[@index_x_5], @index_y[@index_y_5]].join]
+  end
+
+  def computer_fires_missile
+  @index_x.product(@index_y).shuffle.pop.join
   end
 
   private

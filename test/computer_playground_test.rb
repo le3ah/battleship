@@ -15,6 +15,11 @@ def test_ships_map_correctly
   assert_equal 3, computer.map_ship_2.count
 end
 
+def test_computer_missile_is_string
+  computer = Computer.new
+  assert_equal String, computer.computer_fires_missile.class
+end
+
 # testing private methods using send below
 
 def test_random_sort_picks_ship_1_integer_in_array

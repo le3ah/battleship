@@ -1,9 +1,10 @@
 require './lib/grid'
+
 class Human
   def initialize
-    @human_gird = Grid.new
+    @human_grid = Grid.new
   end
-
+  
   def take_shot
 
   end

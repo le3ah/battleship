@@ -2,10 +2,11 @@ require 'pry'
 require "./lib/ship.rb"
 
 class Grid
- attr_reader :rows, :all_ships
+ attr_reader :rows, :all_computer_ships, :all_human_ships
 
   def initialize
-    @all_ships = []
+    @all_computer_ships = []
+    @all_human_ships = []
     @rows = { "A" => {
       "A" => "A",
       "1" => " ",
@@ -58,25 +59,24 @@ class Grid
 
   def create_ships(player,coordinates)
     ship = Ship.new(player, coordinates)
-    @all_ships << ship
+    if player == "human"
+      @all_human_ships << ship
+    else
+      @all_computer_ships << ship
+    end
+    ship
   end
 
   def get_all_computer_ship_coordinates
-     all_ship_coordinates = []
-     @all_ships.each do |ship|
-       all_ship_coordinates << ship.coordinates
-     end
-     all_ship_coordinates
+     @all_computer_ships.map do |ship|
+       ship.coordinates
+     end.flatten
   end
 
-  # def validate_hit
-  #    ship2.coordinates.each do |coordinate|
-  #        ship1.include?(coordinate)
-  #        puts "Your previous ship is in that spot, pick another ship position"
-  #       # here I need to call the method that prompts for new coordinates for the second ship
-  #    end
-  # end
-  #
+  def hit?(shot_coordinate)
+    get_all_computer_ship_coordinates.include?(shot_coordinate)
+  end
+
   # def tell_ship_it_is_hit
   #   if validate_hit == true
   # end

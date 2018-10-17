@@ -1,7 +1,8 @@
 require 'pry'
-
+require './lib/computer_playground'
+require './lib/human'
+require './lib/grid'
 class Game
-  attr_reader :human_coordinates_ship_1
 
   def initialize
     @computer = Computer.new
@@ -10,18 +11,20 @@ class Game
 
   def welcome
     puts "Welcome to BATTLESHIP"
+    want_to_play
   end
-  def want_to_play
 
+  def want_to_play
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     puts ">"
     @answer = gets.chomp
+    answer_output
   end
 
   def answer_output
     if @answer == "p"
       puts "Let's play!"
-      player_human_place_ships
+      player_computer_places_ships
       true
     elsif @answer == "i"
       puts "Here are the instructions"
@@ -44,25 +47,48 @@ class Game
     end
   end
 
-  def player_human_place_ships
-    player = Player.new
+  def player_computer_places_ships
+    require "pry"
+    ship_1 = @computer.map_ship_1
+    ship_2 = @computer.map_ship_2
+    computer_grid = Grid.new
+     if computer_grid.validate(ship_1, ship_2)
+       computer_grid.create_ships("computer", ship_1)
+       computer_grid.create_ships("computer", ship_2)
+       player_human_place_ships
+     else
+       player_computer_places_ships
+     end
+  end
 
+  def player_human_place_ships
     puts  "I have laid out my ships on the grid.
       You now need to layout your two ships.
       The first is two units long and the
-      second is three units long.
-      The grid has A1 at the top left and D4 at the bottom right and looks like this:
+      second is three units long."
+    puts  "The grid has A1 at the top left and D4 at the bottom right and looks like this:
       "
     create_human_grid
     puts @human_grid.prints_board
     puts  "Enter the squares for the two-unit ship:
-     please use a capital letter and number separates by a space followed by another capital letter and number like this: A1 A2"
+     please use a capital letter and number separated by a space followed by another capital letter and number like this: A1 A2"
     puts ">"
       @human_coordinates_ship_1 = gets.chomp.split
-      @human.create_ship("human", @human_coordinates_ship_1)
-    puts "Valid coordinates, now place your three-unit ship:
-    please use a capital letter and number separates by a space followed by another capital letter and number like this: A1 A2"
+      @human_grid.create_ships("human", @human_coordinates_ship_1)
+    puts "Now place your three-unit ship:
+    please use a capital letter and number separates by a space followed by another capital letter and number like this: A1 A2 A3"
       @human_coordinates_ship_2 = gets.chomp.split
+      @human_grid.create_ships("human", @human_coordinates_ship_2)
+      if @human_grid.validate(@human_coordinates_ship_1,  @human_coordinates_ship_2 )
+        @human_grid.create_ships("human", @human_coordinates_ship_1)
+        @human_grid.create_ships("human", @human_coordinates_ship_2)
+
+      else
+        puts "Coordinates were invalid.  Remember they cannot overlap."
+        puts "The request-ship sequence will now begin again."
+        player_human_places_ships
+      end
+      @human_grid.prints_board
   end
 
   def create_human_grid
@@ -82,8 +108,9 @@ class Game
      # has already been used
      human_hit = @computer_grid.hit?(@player_shot)
      if human_hit
-
+       @computer_grid.record_hit(@player_shot)
      else
+
      end
 
 
@@ -104,6 +131,6 @@ class Game
 end
 game = Game.new
 game.welcome
-game.want_to_play
-game.answer_output
-game.play_game
+# game.want_to_play
+# game.answer_output
+# game.play_game

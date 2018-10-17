@@ -86,19 +86,23 @@ attr_reader :map_ship_1, :map_ship_2, :index_x, :index_y, :computer_fires_missil
         @index_y_4 = second_coordinate(@index_y_3)
       end
         @computer_ship_2_coordinate_2 = [@index_x_4, @index_y_4]
-        @computer_ship_2_coordinate_2 
+        @computer_ship_2_coordinate_2
     end
 
     def pick_coordinate_3(third, fourth)
 
-      if fourth == 3 || third == 3
+      if fourth == 3
         fifth = 1
-      elsif fourth == 0 || third == 0
+      elsif third == 3
+        fifth = 1
+      elsif fourth == 0
+        fifth = 2
+      elsif third == 0
         fifth = 2
       else fifth = [0, 3].sample
       end
     end
-  
+
   def ship_2_coordinate_3
         if @index_x_3 == @index_x_4
           @index_x_5 = @index_x_3

@@ -18,7 +18,7 @@ class GridTest < Minitest::Test
     grid.create_ships("computer", ["C1","C2","C3"])
     assert_equal [human_ship_1, human_ship_2] ,grid.all_human_ships
   end
-  
+
   def test_it_tracks_computer_ships
     grid = Grid.new
     human_ship = grid.create_ships("human", ["A1","A2","A3"])
@@ -40,6 +40,7 @@ class GridTest < Minitest::Test
     computer_ship_2 = computer_grid.create_ships("computer", ["A1","A2"])
     assert_equal true , computer_grid.hit?("A1")
     assert_equal false, computer_grid.hit?("D1")
+  end
 
   def test_coordinates_on_grid
     ai_grid = Grid.new
@@ -104,7 +105,7 @@ class GridTest < Minitest::Test
     ai_grid.ships_not_diagonal?(ship_1)
     ai_grid.ships_not_diagonal?(ship_2)
     ai_grid.ships_cannot_overlap?(ship_1, ship_2)
-    assert_equal "Ship coordinates are valid.", ai_grid.validate(ship_1, ship_2)
+    assert_equal true, ai_grid.validate(ship_1, ship_2)
   end
 
 end

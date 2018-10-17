@@ -161,7 +161,7 @@ class Grid
     else true
     end
 
-  
+
   end
 
   def ships_cannot_overlap?(ship_1, ship_2)
@@ -190,9 +190,9 @@ class Grid
       ships_cannot_wrap?(ship_1) == true &&
       ships_cannot_wrap?(ship_2) == true &&
       ships_cannot_overlap?(ship_1, ship_2) == true
-      p "Ship coordinates are valid."
+      true
     else
-      p "Ship coordinates are not valid."
+      false
     end
   end
 

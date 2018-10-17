@@ -75,9 +75,9 @@ class Grid
     @index_x.index(x.split("").first) != nil &&
       @index_y.index(x.split("").last) != nil
     end
-    if result[0] || result[1]
+    if result[0] && result[1]
       true
-    elsif result[0] || result[2]
+    elsif result[0] && result[2]
       true
     else
     end

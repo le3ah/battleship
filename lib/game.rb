@@ -1,17 +1,18 @@
-require "./lib/player.rb"
 require 'pry'
-class Game
 
-attr_reader :human_coordinates_ship_1
+class Game
+  attr_reader :human_coordinates_ship_1
+
   def initialize
     @computer = Computer.new
     @human = Human.new
   end
+
   def welcome
     puts "Welcome to BATTLESHIP"
   end
-
   def want_to_play
+
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     puts ">"
     @answer = gets.chomp
@@ -54,22 +55,42 @@ attr_reader :human_coordinates_ship_1
       "
     create_human_grid
     puts @human_grid.prints_board
-    puts  "Enter the squares for the two-unit ship:"
+    puts  "Enter the squares for the two-unit ship:
+     please use a capital letter and number separates by a space followed by another capital letter and number like this: A1 A2"
     puts ">"
-      @human_coordinates_ship_1 = gets.chomp.upcase
-      @human.human_grid.create_ships("human", @human_coordinates_ship_1)
-    puts "Valid coordinates, now place your three-unit ship:"
-      @human_coordinates_ship_2 = gets.chomp.upcase
+      @human_coordinates_ship_1 = gets.chomp.split
+      @human.create_ship("human", @human_coordinates_ship_1)
+    puts "Valid coordinates, now place your three-unit ship:
+    please use a capital letter and number separates by a space followed by another capital letter and number like this: A1 A2"
+      @human_coordinates_ship_2 = gets.chomp.split
   end
 
   def create_human_grid
     @human_grid = Grid.new
   end
 
+  def create_computer_grid
+    @computer_grid = Grid.new
+  end
+
   def start_human_shots
     puts "Where do you want to hit? Enter 1 coordinate"
     puts ">"
      @player_shot = gets.chomp.upcase
+     #check if it is a valid shot
+     #check if it is a new shot or it
+     # has already been used
+     human_hit = @computer_grid.hit?(@player_shot)
+     if human_hit
+
+     else
+     end
+
+
+  end
+
+  def start_computer_shots
+    #get random shot from computer
   end
 
 

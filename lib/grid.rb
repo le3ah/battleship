@@ -3,12 +3,11 @@ require "./lib/ship.rb"
 require './lib/computer_playground'
 
 class Grid
- attr_reader :rows, :ships
-#determine how you are going to store the shot information on the board
-#and how the board is printed with the shot information
-#consider making the board structure an instance variable to hold the data for shots
+ attr_reader :rows, :all_computer_ships, :all_human_ships
+
   def initialize
-    @all_ships = []
+    @all_computer_ships = []
+    @all_human_ships = []
     @rows = { "A" => {
       "A" => "A",
       "1" => " ",
@@ -56,19 +55,39 @@ class Grid
     puts "============
     "
   end
-  def get_human_coordinates_for_ship(@human_coordinates_ship_1, @human_coordinates_ship_2)
+
+  def get_human_coordinates_for_ship(human_coordinates_ship_1, human_coordinates_ship_2)
 
   end
 
   def create_ships(player,coordinates)
     ship = Ship.new(player, coordinates)
-    @all_ships << ship
+    if player == "human"
+      @all_human_ships << ship
+    else
+      @all_computer_ships << ship
+    end
+    ship
   end
 
-  def store_h_on_grid(coordinate)
-    x , y = coordinate.chars
-    rows[x][y] = "H"
+  def get_all_computer_ship_coordinates
+     @all_computer_ships.map do |ship|
+       ship.coordinates
+     end.flatten
   end
+
+  def hit?(shot_coordinate)
+    get_all_computer_ship_coordinates.include?(shot_coordinate)
+  end
+
+  # def tell_ship_it_is_hit
+  #   if validate_hit == true
+  # end
+  #
+  # def store_h_on_grid(coordinate)
+  #   x , y = coordinate.chars
+  #   rows[x][y] = "H"
+  # end
 
   def ships_on_grid?(coordinate)
     result = coordinate.map do |x|
